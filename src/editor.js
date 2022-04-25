@@ -79,6 +79,12 @@ function createHTML(options = {}) {
         var defaultParagraphSeparatorString = 'defaultParagraphSeparator';
         var formatBlock = 'formatBlock';
         var editor = null, editorFoucs = false, o_height = 0, compositionStatus = 0, paragraphStatus = 0, enterStatus = 0;
+        function validURL(str) {
+           try {
+            new URL(str);
+            return true;
+          } catch (err) { return false; }
+        }
         function addEventListener(parent, type, listener) {
             return parent.addEventListener(type, listener);
         };
@@ -307,8 +313,15 @@ function createHTML(options = {}) {
                     title = title || window.getSelection().toString();
                     title = title || window.prompt('Başlığı girin - isteğe bağlı');
                     var url = data.url || window.prompt('Linki girin');
+                    if(!validURL(url)){
+                      alert('Bu yanlış bir link. Lütfen linki tam ve düzgün girin');
+                      return
+                    }
                     if (url){
                         exec('insertHTML', "<a href='"+ url +"'>"+(title || url)+"</a>");
+                    }
+                    else{
+                      alert('Bu yanlış bir link. Lütfen linki tam ve düzgün girin')
                     }
                 }
             },
