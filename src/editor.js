@@ -305,8 +305,8 @@ function createHTML(options = {}) {
                     data = data || {};
                     var title = data.title;
                     title = title || window.getSelection().toString();
-                    // title = title || window.prompt('Enter the link title');
-                    var url = data.url || window.prompt('Enter the link URL');
+                    title = title || window.prompt('Başlığı girin - isteğe bağlı');
+                    var url = data.url || window.prompt('Linki girin');
                     if (url){
                         exec('insertHTML', "<a href='"+ url +"'>"+(title || url)+"</a>");
                     }
